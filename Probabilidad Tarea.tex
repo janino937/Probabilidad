@@ -1,0 +1,175 @@
+% !TeX spellcheck = en_US
+\documentclass[letter,twoside,12pt]{article}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\title{Probabilidad: Tarea \#1}
+\newtheorem{lemma}{Lema}
+\author{Jonathan Andrés Niño Cortés}
+\begin{document}
+\maketitle
+\textbf{Ejercicio 1}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item Para calcular esta probabilidad utilizamos la distribución hipergeométrica (suponiendo claro que los peces recapturados no se regresan). Esta probabilidad esta dada por la fórmula:
+
+\begin{equation}
+p_N=\mathcal{H}_{N,R,n}(\{r\})=\frac{\binom{R}{r}\binom{N-R}{n-r}}{\binom{N}{n}} \nonumber.
+\end{equation}
+
+\item 
+\begin{equation}
+\frac{p_N}{p_{N-1}} = \frac{\binom{R}{r}\binom{N-R}{n-r}\binom{N-1}{n}}{\binom{N}{n}\binom{R}{r}\binom{N-R-1}{n-r}}=\frac{(N-R)(N-n)}{N(N-R-n+r)}=\frac{N^2-RN-Nn+Rn}{N^2-RN-Nn+Nr} \nonumber.
+\end{equation}
+
+Vemos que esta formula es igual a 1 cuando $ Rn = Nr $, es decir cuando $N=N_0=\frac{Rn}{r}$y este punto acercado al entero más cercano nos da el maximo. Si elegimos un $N$ menor la fórmula anterior nos daría un número mayor a 1 que significa que $p_N$ sigue creciendo y no ha alcanzado su maximo. Por otra parte si elegimos un $ N $ mayor entonces obtenemos un valor menor a 1, que significa que $p_N$ a empezado a decrecer.
+
+La razón para considerar este número como el \textbf{MLE} esta en que al ser $ N_0 $ el $N$ para el que la probabilidad de que los resultados fueran los obtenidos, sería natural que esta fuera el $N$ que con mayor probabilidad se acerca al $ N $ real.
+\item Según el numeral anterior, el MLE del número de peces en el estanco se calcularía a partir de $ N_0= \frac{Rn}{r} = \frac{211*147}{11}=2819.72$. Por lo tanto, el MLE sería de 2820 peces. 
+\end{enumerate}
+\textbf{Ejercicio 2}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item La probabilidad en este caso esta dada por la distribución binomial.
+\begin{equation}
+\mathcal{B}_{N,R,n}(\{r\})=\binom{n}{r}\frac{R^r(N-R)^{n-r}}{N^n} \nonumber
+\end{equation}
+\item Si denotamos $ p = \frac{R}{N}$, podemos reescribir la anterior fórmula como
+\begin{equation}
+\mathcal{B}_{N,R,n}(\{r\}) =\mathcal{B}_{p,n}(\{r\})=\binom{n}{r}p^r(1-p)^{n-r} \nonumber
+\end{equation}
+
+Ahora para calcular el máximo derivamos la fórmula anterior por $ p $. y averiguamos en que punto es igual a 0.
+\begin{equation}
+\frac{dP_p}{dp}=rp^{r-1}(1-p)^{n-r}+p^r(n-r)(1-p)^{n-r-1}=0 \nonumber
+\end{equation}
+\begin{eqnarray}
+rp^{r-1}(1-p)^{n-r}&=&-p^r(n-r)(1-p)^{n-r-1} \nonumber
+\\ (1-p)r&=&-p(n-r) \nonumber
+\\ r-pr&=&-pn+pr \nonumber
+\\ r&=&p(2r-n) \nonumber
+\\ \frac{r}{(2r-n)}&=&p \nonumber
+\end{eqnarray}
+
+Luego el MLE sería $ N=Rr/(2r-n) $
+\end{enumerate}
+\textbf{Ejercicio 3}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item Para este caso vamos a modelar primero a $M$ como el conjunto de las categorias de suelos y segundo el espacio de eventos sería $ \Omega = M^n=\{(b_1,\cdots,b_n):b_j \in M\} $, es decir, todas las $n$-tuplas de resultados posibles. El número total de eventos posibles serían $5^n$.
+
+\item En este caso puedo despreciar el orden en que se toman las muestras suponiendo que es irrelevante el lugar exacto donde se tomen si se asume que el terreno de muestreo es lo suficientemente pequeño. Por lo tanto, $ \Omega = \{(b_1,\cdots,b_n)\in M^n:b_1\leq \cdots \leq b_n\} $, es decir, el número de $n$-tuplas ordenadas. El tamaño de resultados posibles es por lo tanto, $ \frac{(4+n)!}{(4)!n!} $.
+
+\item En este caso consideraremos el conjunto $M'$ como el conjunto de todos los resultados posibles que se pueden obtener en un solo año. Entonces $M' = \{(b_1,\cdots,b_3)\in M^3:b_1\leq \cdots \leq b_3\}$ y su tamaño estaría dado por $ \frac{(4+3)!}{4!3!}= 35 $. Por lo tanto el espacio de resultados diferentes en $n$ años estaria modelado por $ \Omega = M^{'n}=\{(b_1,\cdots,b_n):b_j \in M'\} $ y el tamaño total de resultados diferentes sería de $35^n$.
+\end{enumerate}
+
+\textbf{Ejercicio 4.}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item Vamos a modelar la situación utilizando la distribución multinomial. La probabilidad de que gane un niño de cada pueblo esta dada por
+
+\begin{equation}
+\mathcal{M}_{n=3,R_1=3,R_2=4,R_3=5,N=12}(\{(1,1,1)\})=\binom{3}{1,1,1}\frac{3*4*5}{12^3}=0.21 \nonumber
+\end{equation}
+
+\item En este caso la probabilidad esta dada por 
+\begin{equation}
+\mathcal{M}_{n=4,R_1=3,R_2=4,R_3=5,N=12}(\{(1,1,2)\})=\binom{4}{1,1,2}\frac{3*4*5^2}{12^4}=0.17 \nonumber
+\end{equation}
+
+\item Esta situación la modelamos con la distribución poligeométrica. Para este caso la probabilidad estaría dada por
+
+\begin{equation}
+\mathcal{Y}_{n=3,R_1=3,R_2=4,R_3=5,N=12}(\{(1,1,1)\})=\frac{\binom{3}{1}\binom{4}{1}\binom{5}{1}}{\binom{12}{3}} = 0.27\nonumber
+\end{equation}
+
+\item Para esta situación las probabilidades serían de
+\begin{equation}
+\mathcal{Y}_{n=4,R_1=3,R_2=4,R_3=5,N=12}(\{(1,1,2)\})=\frac{\binom{3}{1}\binom{4}{1}\binom{5}{2}}{\binom{12}{4}} = 0.24\nonumber
+\end{equation}
+
+Sin embargo, esta no es la probabilidad porque estamos eligiendo 4 personas y uno de los "grupos" tiene 3 representantes.
+\end{enumerate}
+\textbf{Ejercicio 5}
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item Para $n=2$ tenemos que $ \mathbb{P}(A_1 \cup A_2)=\mathbb{P}(A_1)+\mathbb{P}(A_2)-\mathbb{P}(A_1 \cap A_2) $ por la definición de aditividad de $ \mathbb{P} $ y vemos que coincide con el que daría la fórmula de Poincaré-Sylvestre. 
+
+Para el caso $ n = 3$ tenemos que 
+\begin{eqnarray}
+\mathbb{P}(A_1 \cup A_2 \cup A_3)&=&\mathbb{P}(A_1\cup A_2)+\mathbb{P}(A_3)-\mathbb{P}((A_1 \cup A_2) \cap A_3) \nonumber
+\\&=& \mathbb{P}(A_1)+\mathbb{P}(A_2)+\mathbb{P}(A_3)-\mathbb{P}(A_1 \cap A_2)-\mathbb{P}((A_1 \cap A_3) \cup ( A_2 \cap A_3)) \nonumber
+\\&=& \mathbb{P}(A_1)+\mathbb{P}(A_2)
++\mathbb{P}(A_3)-\mathbb{P}(A_1 \cap A_2)-\mathbb{P}(A_1 \cap A_3) - \mathbb{P}( A_2 \cap A_3) \nonumber
+\\&&+\mathbb{P}(A_1 \cap A_2 \cap A_3) \nonumber
+\end{eqnarray}
+
+Que denuevo esta dada por la la fórmula de Poincaré-Sylvestre.
+\item Supongase que para $ n $ la fórmula corresponde y tomemos $ n+1 $ conjuntos.
+
+\begin{eqnarray}
+\mathbb{P}(A_1 \cup \cdots \cup A_n \cup A_{n+1}) &=& \mathbb{P}(A_1 \cup \cdots \cup A_n)+ \mathbb{P}(A_{n+1})-\mathbb{P}((A_1 \cup \cdots \cup A_n) \cap A_{n+1}) \nonumber
+\\ &=& \mathbb{P}(A_1 \cup \cdots \cup A_n)+ \mathbb{P}(A_{n+1})-\mathbb{P}((A_1 \cap A_{n+1}) \cup \cdots \cup( A_n \cap A_{n+1})) \nonumber
+\end{eqnarray}
+
+Ahora utilizamos la hipótesis de inducción:
+
+\begin{multline}
+=\sum_{k=1}^{n} (-1)^{k-1} \sum_{\substack{(i_1, \cdots i_k) \\1\leq i_1<\cdots<i_k\leq n)}}\mathbb{P}(A_{i_1} \cap \cdots \cap A_{i_k}) + \mathbb{P}(A_n+1)-\\\sum_{k=1}^{n} (-1)^{k-1} \sum_{\substack{(i_1, \cdots i_k) \\1\leq i_1<\cdots<i_k\leq n)}}\mathbb{P}(A_{n+1}\cap A_{i_1} \cap \cdots \cap A_{i_k}) \nonumber
+\end{multline}
+
+Ahora para pegar las dos sumatorias necesitamos primero hacer una manipulación con los índices. Si ahora pasamos a $ n+1 $, vemos que para cada $ k $ los términos que faltan en una sumatoria estan en la otra. Por lo tanto
+\end{enumerate}
+\begin{equation}
+=\sum_{k=1}^{n+1} (-1)^{k-1} \sum_{\substack{(i_1, \cdots i_k) \\1\leq i_1<\cdots<i_k\leq n)}}\mathbb{P}(A_{i_1} \cap \cdots \cap A_{i_k}) \nonumber
+\end{equation}
+
+\textbf{Ejercicio 6}
+
+\begin{enumerate}[label=\textbf{\arabic*)}]
+\item 
+\begin{equation}
+\mathbb{P}(E_i^n)=\frac{(n-1)!}{n!}=\frac{1}{n} \nonumber 
+\end{equation}
+
+\item 
+\begin{equation}
+\mathbb{P}(E_{i_1,\cdots, i_k}^n)=\frac{(n-k)!}{n!} \nonumber 
+\end{equation}
+\item El evento se puede interpretar como la unión de todos los eventos $ E_i^n $. Para calcular esta probabilidad utilizamos la fórmula del punto anterior
+
+\begin{equation}
+\mathbb{P}(\bigcup_{i=1}^n E_i^n)=\sum_{k=1}^{n} (-1)^{k-1} \sum_{\substack{(Ei_1, \cdots i_k) \\1\leq i_1<\cdots<i_k\leq n)}}\mathbb{P}(E_{i_1}^n \cap \cdots \cap E_{i_k}^n) \nonumber
+\end{equation}
+
+Observése que $ E_{i_1}^n \cap \cdots \cap E_{i_k}^n  = E_{i_1,\cdots,i_k}$. Luego nuestra fórmula queda como
+
+\begin{equation}
+\mathbb{P}(\bigcup_{i=1}^n E_i^n)=\sum_{k=1}^{n} (-1)^{k-1} \sum_{\substack{(i_1, \cdots i_k) \\1\leq i_1<\cdots<i_k\leq n)}}\mathbb{P}(E_{i_1,\cdots,i_k}) \nonumber
+\end{equation}
+
+Además sabemos que el número de$ (i_1, \cdots i_k) $ diferentes es igual a $ \binom{n}{k} $, es decir que la euación anterior queda como
+
+\begin{eqnarray}
+\mathbb{P}(\bigcup_{i=1}^n E_i^n)&=&\sum_{k=1}^{n} (-1)^{k-1} \binom{n}{k} \frac{(n-k)!}{n!} \nonumber
+\\&=&\sum_{k=1}^{n} (-1)^{k-1} \frac{n!}{k!(n-k)!} \frac{(n-k)!}{n!} \nonumber
+\\&=&\sum_{k=1}^{n} \frac{(-1)^{k-1}}{k!} \nonumber
+\\&=&1+\sum_{k=0}^{n} \frac{(-1)^{k-1}}{(k)!} \nonumber
+\\&=&1-\sum_{k=0}^{n} \frac{(-1)^{k}}{(k)!} \nonumber
+\end{eqnarray}
+
+Ahora si dejamos que $ n $ tienda al infinito vemos que la sumatoria obtenida es la serie de potencias que converge a $ e^x $ evaluada en -1. Por lo tanto,
+
+\begin{equation}
+\lim_{n \to \infty} \mathbb{P}(\bigcup_{i=1}^n E_i^n)=1-\frac{1}{e} \nonumber
+\end{equation}
+
+\end{enumerate}
+
+
+
+\end{document}
